@@ -1,9 +1,9 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.example.recipes.AddHealthCheckToControllers
-displayName: Add health check endpoint to all REST controllers
+name: com.example.recipes.ExportCustomEndpointsToPrethink
+displayName: Export custom endpoints to Prethink context
 description: >
-  Adds a GET /health endpoint to every Spring @RestController class
-  that does not already define one.
+  Reads endpoint definitions from custom.properties and generates
+  Prethink-compatible context files in .moderne/context/.
 recipeList:
-  - com.example.recipes.AddHealthCheckMethod
+  - com.example.recipes.ExportCustomEndpoints

@@ -52,3 +52,19 @@ jobs:
           echo ""
           echo "=== Data tables ==="
           find build/reports/rewrite -type f 2>/dev/null || echo "No data tables exported"
+
+      - name: Verify Mermaid architecture diagram
+        run: |
+          DIAGRAM=".moderne/context/architecture.md"
+          if [ ! -s "$DIAGRAM" ]; then
+            echo "ERROR: $DIAGRAM is missing or empty"
+            exit 1
+          fi
+          if ! grep -qE '^(graph|flowchart) ' "$DIAGRAM"; then
+            echo "ERROR: $DIAGRAM does not contain a Mermaid graph/flowchart directive"
+            echo "--- contents ---"
+            cat "$DIAGRAM"
+            exit 1
+          fi
+          echo "Mermaid diagram verified:"
+          cat "$DIAGRAM"

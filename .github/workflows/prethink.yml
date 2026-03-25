@@ -26,6 +26,15 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      # Workaround: Prethink generates calm-architecture.json and architecture.md
+      # in one cycle but deletes them in a subsequent cycle. The Gradle plugin
+      # then fails trying to delete files that were never written to disk.
+      # See: https://github.com/moderneinc/rewrite-prethink/issues/XXX
+      - name: Work around Prethink multi-cycle delete bug
+        run: |
+          mkdir -p .moderne/context
+          touch .moderne/context/calm-architecture.json .moderne/context/architecture.md
+
       - name: Run Prethink (no AI) and custom recipe
         run: ./gradlew :app:rewriteRun
 

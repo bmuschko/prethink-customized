@@ -1,15 +1,19 @@
 package com.example.recipes;
 
+import lombok.EqualsAndHashCode;
+import lombok.Value;
 import org.openrewrite.*;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.text.PlainText;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.nio.file.Paths;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Value
+@EqualsAndHashCode(callSuper = false)
 public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.Accumulator> {
 
     @Override
@@ -38,7 +42,7 @@ public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.
                     String path = sf.getSourcePath().toString();
                     if (path.equals(".moderne/context/custom-endpoints.csv")) {
                         acc.alreadyGenerated = true;
-                    } else if (path.endsWith("custom.properties")) {
+                    } else if (path.endsWith("/custom.properties") || path.equals("custom.properties")) {
                         acc.endpoints.addAll(parseEndpoints(sf.printAll()));
                     }
                 }
@@ -57,7 +61,7 @@ public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.
 
         result.add(new PlainText(
                 Tree.randomId(),
-                Paths.get(".moderne/context/custom-endpoints.csv"),
+                Path.of(".moderne/context/custom-endpoints.csv"),
                 Markers.EMPTY,
                 null, false, null, null,
                 buildCsv(acc.endpoints),
@@ -65,7 +69,7 @@ public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.
 
         result.add(new PlainText(
                 Tree.randomId(),
-                Paths.get(".moderne/context/custom-endpoints.md"),
+                Path.of(".moderne/context/custom-endpoints.md"),
                 Markers.EMPTY,
                 null, false, null, null,
                 buildMarkdown(),

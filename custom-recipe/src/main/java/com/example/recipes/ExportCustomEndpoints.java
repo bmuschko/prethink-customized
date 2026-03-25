@@ -1,7 +1,7 @@
 package com.example.recipes;
 
 import lombok.EqualsAndHashCode;
-import lombok.Value;
+import lombok.Getter;
 import org.openrewrite.*;
 import org.openrewrite.marker.Markers;
 import org.openrewrite.text.PlainText;
@@ -12,20 +12,14 @@ import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Value
+@Getter
 @EqualsAndHashCode(callSuper = false)
 public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.Accumulator> {
 
-    @Override
-    public String getDisplayName() {
-        return "Export custom endpoints to Prethink context";
-    }
+    final String displayName = "Export custom endpoints to Prethink context";
 
-    @Override
-    public String getDescription() {
-        return "Reads endpoint definitions from custom.properties and generates " +
-               "a Prethink-compatible context CSV and Markdown file in .moderne/context/.";
-    }
+    final String description = "Reads endpoint definitions from custom.properties and generates " +
+            "a Prethink-compatible context CSV and Markdown file in .moderne/context/.";
 
     @Override
     public Accumulator getInitialValue(ExecutionContext ctx) {

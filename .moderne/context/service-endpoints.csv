@@ -1,2 +1,0 @@
-Entity ID,Source path,Service class,Method name,HTTP method,Path,Produces,Consumes,Framework,Method signature
-endpoint:com.example.demo.controller.GreetingController#greeting(String),app/src/main/java/com/example/demo/controller/GreetingController.java,com.example.demo.controller.GreetingController,greeting,GET,/api/greeting,,,Spring,"com.example.demo.controller.GreetingController{name=greeting,return=com.example.demo.model.Greeting,parameters=[java.lang.String]}"

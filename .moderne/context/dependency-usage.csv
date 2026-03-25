@@ -1,7 +1,0 @@
-Library,Top-level package,Usage pattern,Common classes,Import count,Example usage
-org.springframework:spring-web:6.2.3,org.springframework,,"RestController, RequestMapping, GetMapping, RequestParam",1,
-org.springframework:spring-context:6.2.3,org.springframework,,Service,1,
-org.springframework.boot:spring-boot-autoconfigure:3.4.3,org.springframework.boot,,SpringBootApplication,1,
-org.springframework.boot:spring-boot:3.4.3,org.springframework.boot,,SpringApplication,1,
-org.junit.jupiter:junit-jupiter-api:5.11.4,org.junit.jupiter,,Test,1,
-org.springframework.boot:spring-boot-test:3.4.3,org.springframework.boot,,SpringBootTest,1,

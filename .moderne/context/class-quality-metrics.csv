@@ -1,5 +1,0 @@
-Source path,Class name,Line count,Method count,Field count,WMC,LCOM4,TCC,CBO,Maintainability index
-app/src/main/java/com/example/demo/controller/GreetingController.java,com.example.demo.controller.GreetingController,16,2,1,2,1,1.0,1,73.49245109566709
-app/src/main/java/com/example/demo/service/GreetingService.java,com.example.demo.service.GreetingService,10,1,1,1,1,1.0,2,67.10890653370228
-app/src/main/java/com/example/demo/DemoApplication.java,com.example.demo.DemoApplication,8,1,0,1,1,1.0,1,71.82888922672883
-app/src/test/java/com/example/demo/DemoApplicationTests.java,com.example.demo.DemoApplicationTests,8,1,0,1,1,1.0,0,80.16552457589864

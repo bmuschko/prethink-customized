@@ -16,6 +16,5 @@ build/
 .DS_Store
 Thumbs.db
 
-# Moderne (keep context, ignore the rest)
-.moderne/*
-!.moderne/context/
+# Moderne
+.moderne/

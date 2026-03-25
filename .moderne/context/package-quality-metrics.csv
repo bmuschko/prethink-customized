@@ -1,5 +1,0 @@
-Package name,Afferent coupling (Ca),Efferent coupling (Ce),Instability,Abstractness,Distance from main sequence,In cycle,Cycle members
-com.example.demo,0,0,0.0,0.0,1.0,false,
-com.example.demo.service,1,1,0.5,0.0,0.5,false,
-com.example.demo.model,2,0,0.0,0.0,1.0,false,
-com.example.demo.controller,0,2,1.0,0.0,0.0,false,

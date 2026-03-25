@@ -1,0 +1,5 @@
+Convention type,Pattern,Example,Frequency,Scope
+naming,Controller suffix for classes,GreetingController,,project-wide
+naming,Service suffix for classes,GreetingService,,project-wide
+naming,create* method naming pattern,createGreeting,,project-wide
+naming,Tests suffix for classes,DemoApplicationTests,,project-wide

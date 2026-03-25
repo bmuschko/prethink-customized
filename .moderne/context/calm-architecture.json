@@ -1,0 +1,35 @@
+{
+  "nodes" : [ {
+    "unique-id" : "greeting-controller",
+    "node-type" : "service",
+    "name" : "GreetingController",
+    "description" : "REST API with endpoints: GET /api/greeting",
+    "interfaces" : [ {
+      "unique-id" : "greeting-controller-api",
+      "port" : 8080
+    } ]
+  }, {
+    "unique-id" : "greeting-data",
+    "node-type" : "data-asset",
+    "name" : "Greeting",
+    "description" : "Record greeting with fields: id, content"
+  } ],
+  "relationships" : [ {
+    "unique-id" : "greeting-controller-calls-greeting-controller",
+    "relationship-type" : {
+      "interacts" : {
+        "actor" : "greeting-controller",
+        "nodes" : [ "greeting-controller" ]
+      }
+    }
+  }, {
+    "unique-id" : "greeting-controller-uses-greeting-data",
+    "relationship-type" : {
+      "interacts" : {
+        "actor" : "greeting-controller",
+        "nodes" : [ "greeting-data" ]
+      }
+    }
+  } ],
+  "$schema" : "https://calm.finos.org/draft/2025-03/meta/calm.json"
+}

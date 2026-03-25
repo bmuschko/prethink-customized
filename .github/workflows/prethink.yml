@@ -1,0 +1,54 @@
+name: Prethink Context Generation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  prethink:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 (Zulu)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Run Prethink (no AI) and custom recipe
+        run: ./gradlew :app:rewriteRun
+
+      - name: Verify generated context files
+        run: |
+          echo "=== Generated Prethink context files ==="
+          find .moderne/context -type f 2>/dev/null || echo "No .moderne/context directory found"
+          echo ""
+          echo "=== Agent config files ==="
+          for f in AGENTS.md CLAUDE.md .cursorrules .github/copilot-instructions.md; do
+            if [ -f "$f" ]; then
+              echo "Found: $f"
+            fi
+          done
+          echo ""
+          echo "=== Data tables ==="
+          find build/reports/rewrite -type f 2>/dev/null || echo "No data tables exported"
+
+      - name: Commit generated context (push only)
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .moderne/context/ AGENTS.md CLAUDE.md .cursorrules .github/copilot-instructions.md || true
+          git diff --cached --quiet || git commit -m "chore: update Prethink context for AI agents"
+          git push

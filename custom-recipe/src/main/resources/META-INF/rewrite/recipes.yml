@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.example.recipes.AddHealthCheckToControllers
+displayName: Add health check endpoint to all REST controllers
+description: >
+  Adds a GET /health endpoint to every Spring @RestController class
+  that does not already define one.
+recipeList:
+  - com.example.recipes.AddHealthCheckMethod

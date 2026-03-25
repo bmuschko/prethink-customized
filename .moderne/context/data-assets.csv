@@ -1,0 +1,2 @@
+Source path,Class name,Simple name,Asset type,Description,Fields
+app/src/main/java/com/example/demo/model/Greeting.java,com.example.demo.model.Greeting,Greeting,Record,"Record greeting with fields: id, content","id, content"

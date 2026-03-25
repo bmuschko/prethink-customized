@@ -1,0 +1,42 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+        vendor = JvmVendorSpec.AZUL
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(platform("org.openrewrite.recipe:rewrite-recipe-bom:latest.release"))
+    implementation("org.openrewrite:rewrite-java")
+
+    compileOnly("org.projectlombok:lombok:latest.release")
+    annotationProcessor("org.projectlombok:lombok:latest.release")
+
+    testImplementation("org.openrewrite:rewrite-test")
+    testImplementation("org.openrewrite:rewrite-java-17")
+    // Spring on test classpath so the parser can resolve Spring annotations
+    testImplementation("org.springframework:spring-web:6.2.2")
+    testImplementation("org.springframework:spring-context:6.2.2")
+    testImplementation(platform("org.junit:junit-bom:5.12.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.add('-parameters')
+}
+
+test {
+    useJUnitPlatform()
+}

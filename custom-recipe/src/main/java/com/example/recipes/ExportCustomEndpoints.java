@@ -35,7 +35,10 @@ public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.
             public Tree visit(Tree tree, ExecutionContext ctx) {
                 if (tree instanceof SourceFile) {
                     SourceFile sf = (SourceFile) tree;
-                    if (sf.getSourcePath().toString().endsWith("custom.properties")) {
+                    String path = sf.getSourcePath().toString();
+                    if (path.equals(".moderne/context/custom-endpoints.csv")) {
+                        acc.alreadyGenerated = true;
+                    } else if (path.endsWith("custom.properties")) {
                         acc.endpoints.addAll(parseEndpoints(sf.printAll()));
                     }
                 }
@@ -46,7 +49,7 @@ public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.
 
     @Override
     public Collection<? extends SourceFile> generate(Accumulator acc, ExecutionContext ctx) {
-        if (acc.endpoints.isEmpty()) {
+        if (acc.endpoints.isEmpty() || acc.alreadyGenerated) {
             return Collections.emptyList();
         }
 
@@ -135,6 +138,7 @@ public class ExportCustomEndpoints extends ScanningRecipe<ExportCustomEndpoints.
 
     static class Accumulator {
         final List<EndpointDef> endpoints = new ArrayList<>();
+        boolean alreadyGenerated = false;
     }
 
     static class EndpointDef {

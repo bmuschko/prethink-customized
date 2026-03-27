@@ -27,8 +27,8 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
     // OpenRewrite recipe dependencies
-    rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:latest.release"))
-    rewrite("io.moderne.recipe:rewrite-prethink:latest.release")
+    rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:3.27.0"))
+    rewrite("io.moderne.recipe:rewrite-prethink:0.5.2")
     // Include the custom recipe module on the rewrite classpath
     rewrite(project(":custom-recipe"))
 }

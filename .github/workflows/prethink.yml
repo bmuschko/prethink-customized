@@ -26,6 +26,16 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
+      # Workaround: Gradle plugin 7.29.0 lacks the exists() check from
+      # openrewrite/rewrite-gradle-plugin#431, so it crashes when deleting
+      # files that were only in-memory. Only calm-architecture.json needs
+      # this — architecture.md must NOT be pre-created as it prevents
+      # GenerateCalmMermaidDiagram from generating the Mermaid diagram.
+      - name: Work around Gradle plugin delete bug
+        run: |
+          mkdir -p .moderne/context
+          touch .moderne/context/calm-architecture.json
+
       - name: Run Prethink (no AI) and custom recipe
         run: ./gradlew :app:rewriteRun --refresh-dependencies
 

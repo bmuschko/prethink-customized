@@ -36,7 +36,7 @@ jobs:
           touch .moderne/context/calm-architecture.json .moderne/context/architecture.md
 
       - name: Run Prethink (no AI) and custom recipe
-        run: ./gradlew :app:rewriteRun
+        run: ./gradlew :app:rewriteRun --refresh-dependencies
 
       - name: Verify generated context files
         run: |

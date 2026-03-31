@@ -28,7 +28,7 @@ dependencies {
 
     // OpenRewrite recipe dependencies
     rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:3.27.0"))
-    rewrite("io.moderne.recipe:rewrite-prethink:0.5.2")
+    rewrite("io.moderne.recipe:rewrite-prethink:0.5.3")
     // Include the custom recipe module on the rewrite classpath
     rewrite(project(":custom-recipe"))
 }

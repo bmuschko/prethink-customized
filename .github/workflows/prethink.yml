@@ -59,3 +59,42 @@ jobs:
           fi
           echo "Architecture context verified:"
           cat "$DIAGRAM"
+
+      - name: Verify custom endpoints context
+        run: |
+          CSV=".moderne/context/custom-endpoints.csv"
+          MD=".moderne/context/custom-endpoints.md"
+
+          for f in "$CSV" "$MD"; do
+            if [ ! -s "$f" ]; then
+              echo "ERROR: $f is missing or empty"
+              exit 1
+            fi
+          done
+
+          # Expected rows derived from app/src/main/resources/custom.properties
+          expected_rows=(
+            "HTTP method,Path,Service,Description"
+            "POST,/api/v2/orders,OrderService,Submit a new order"
+            "GET,/api/v2/orders/{orderId},OrderService,Retrieve order details by ID"
+            "PUT,/api/v2/inventory/{sku},InventoryService,Update inventory stock level"
+          )
+          for row in "${expected_rows[@]}"; do
+            if ! grep -Fxq "$row" "$CSV"; then
+              echo "ERROR: $CSV is missing expected row: $row"
+              echo "--- contents ---"
+              cat "$CSV"
+              exit 1
+            fi
+          done
+
+          if ! grep -Fq "# Custom Endpoints" "$MD"; then
+            echo "ERROR: $MD is missing the expected heading"
+            cat "$MD"
+            exit 1
+          fi
+
+          echo "Custom endpoints context verified:"
+          cat "$CSV"
+          echo ""
+          cat "$MD"

@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.3'
-    id 'org.openrewrite.rewrite' version '7.29.0'
+    id 'org.openrewrite.rewrite' version '7.29.1'
 }
 
 group = 'com.example'
@@ -28,7 +28,7 @@ dependencies {
 
     // OpenRewrite recipe dependencies
     rewrite(platform("org.openrewrite.recipe:rewrite-recipe-bom:3.27.0"))
-    rewrite("io.moderne.recipe:rewrite-prethink:0.5.3")
+    rewrite("io.moderne.recipe:rewrite-prethink:0.5.4")
     // Include the custom recipe module on the rewrite classpath
     rewrite(project(":custom-recipe"))
 }

@@ -17,11 +17,11 @@ repositories {
 }
 
 dependencies {
-    implementation(platform("org.openrewrite.recipe:rewrite-recipe-bom:latest.release"))
+    implementation(platform("org.openrewrite.recipe:rewrite-recipe-bom:3.27.1"))
     implementation("org.openrewrite:rewrite-java")
 
-    compileOnly("org.projectlombok:lombok:latest.release")
-    annotationProcessor("org.projectlombok:lombok:latest.release")
+    compileOnly("org.projectlombok:lombok:1.18.44")
+    annotationProcessor("org.projectlombok:lombok:1.18.44")
 
     testImplementation("org.openrewrite:rewrite-test")
     testImplementation("org.openrewrite:rewrite-java-17")

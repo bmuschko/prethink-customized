@@ -39,7 +39,6 @@ rewrite {
         "io.moderne.prethink.UpdatePrethinkContextNoAiStarter",
         "com.example.recipes.ExportCustomEndpointsToPrethink"
     )
-    exportDatatables = false
 }
 
 tasks.named('test') {
